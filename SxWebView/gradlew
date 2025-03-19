@@ -1,0 +1,22 @@
+#!/bin/sh
+# This is the Gradle Wrapper script for UNIX-based systems
+# See https://docs.gradle.org/current/userguide/gradle_wrapper.html for more details.
+
+# JVM options to be passed when running Gradle
+DEFAULT_JVM_OPTS="-Xmx1024m"
+
+# Gradle version to use
+GRADLE_VERSION=7.5 # Adjust this version if needed
+
+# Set Gradle home and other environment variables
+GRADLE_HOME=$(pwd)/gradle
+GRADLE_BIN=$GRADLE_HOME/bin
+
+# Check if the wrapper is present in the project
+if [ ! -d "$GRADLE_BIN" ]; then
+  echo "Gradle wrapper files not found! Running 'gradle wrapper' to generate them."
+  gradle wrapper --gradle-version $GRADLE_VERSION
+fi
+
+# Execute Gradle command
+"$GRADLE_BIN/gradle" "$@"
