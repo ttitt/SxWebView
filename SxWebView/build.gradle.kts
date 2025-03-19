@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
+    id("com.android.library") // 直接使用插件 ID，而不是别名
 }
 
 android {
