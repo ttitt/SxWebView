@@ -3,17 +3,18 @@ name: Build Android AAR
 on:
   push:
     branches:
-      - main  # 监听 main 分支的 push 事件
+      - main
   pull_request:
     branches:
       - main
+
 env:
   ACTIONS_STEP_DEBUG: true
 
 jobs:
   build:
     name: Build AAR
-    runs-on: ubuntu-latest  # 使用 GitHub 提供的 Ubuntu 环境
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
@@ -22,7 +23,7 @@ jobs:
     - name: Setup JDK
       uses: actions/setup-java@v2
       with:
-        distribution: 'temurin'  # 使用 Temurin JDK（原 AdoptOpenJDK）
+        distribution: 'temurin'
         java-version: '17'
 
     - name: Setup Android SDK
@@ -31,11 +32,17 @@ jobs:
     - name: Grant execute permission for Gradle
       run: chmod +x gradlew
 
+    - name: Clean old build files
+      run: rm -rf SxWebView/build/outputs/aar/*
+
     - name: Build AAR
-      run: ./gradlew :sxwebview:assembleRelease  # 确保模块名称和任务名正确
+      run: ./gradlew :sxwebview:assembleRelease
+
+    - name: List build outputs
+      run: ls -lR SxWebView/build/outputs/aar/
 
     - name: Upload AAR as artifact
       uses: actions/upload-artifact@v4
       with:
         name: SxWebView-AAR
-        path: SxWebView/build/outputs/aar/sxwebview-release2.aar  # 确保路径正确
+        path: SxWebView/build/outputs/aar/*.aar  # 确保上传的是新生成的 AAR
