@@ -33,7 +33,7 @@ jobs:
       run: ./gradlew :sxwebview:assembleRelease  # 这里 "sxwebview" 需要改成你的 module 名称
 
     - name: Upload AAR as artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: SxWebView-AAR
         path: sxwebview/build/outputs/aar/sxwebview-release.aar  # 确保路径正确
