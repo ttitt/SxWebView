@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Setup JDK
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v2
       with:
         distribution: 'temurin'  # 使用 Temurin JDK（原 AdoptOpenJDK）
         java-version: '17'
@@ -32,7 +32,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build AAR
-      run: ./gradlew :sxwebview:assembleRelease  # 这里 "sxwebview" 需要改成你的 module 名称
+      run: ./gradlew :sxwebview:assembleRelease  # 确保模块名称和任务名正确
 
     - name: Upload AAR as artifact
       uses: actions/upload-artifact@v4
